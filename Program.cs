@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using lacker_admin.Services;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +15,8 @@ namespace lacker_admin
     {
         public static void Main(string[] args)
         {
+            Ddns.Instance.RunAutoUpdate();
+
             CreateWebHostBuilder(args).Build().Run();
         }
 
