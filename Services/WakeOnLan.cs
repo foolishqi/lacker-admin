@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
@@ -8,6 +9,13 @@ namespace lacker_admin.Services
 {
     public class WakeOnLan
     {
+        private readonly IEnumerable<dynamic> hosts =
+            new List<dynamic>
+            {
+                new { host = "home", mac = "70:85:C2:36:CA:5A", address = "255.255.255.255", port = 8000 },
+                new { host = "yw", mac = "", address = "172.16.10.38", port = 8000 }
+            };
+
         public async Task Wake(string mac, string address, int port)
         {
             var macBuffer = mac.Split('-', ':')
@@ -31,6 +39,13 @@ namespace lacker_admin.Services
 
                 await client.SendAsync(stream.GetBuffer(), (int)stream.Length);
             }
+        }
+
+        public Task WakeHost(string host)
+        {
+            var h = hosts.First(m => m.host == host);
+
+            return Wake(h.mac, h.address, h.port);
         }
     }
 }
