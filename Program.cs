@@ -15,8 +15,6 @@ namespace lacker_admin
     {
         public static void Main(string[] args)
         {
-            Ddns.Instance.RunAutoUpdate();
-
             CreateWebHostBuilder(args).Build().Run();
         }
 

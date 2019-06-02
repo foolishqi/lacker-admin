@@ -26,6 +26,16 @@ namespace lacker_admin
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddLogging(builder => 
+            {
+                builder.AddConfiguration(Configuration)
+                    .AddConsole();
+            });
+
+            var provider = services.BuildServiceProvider();
+            Services.Ddns.Instance.logger = provider.GetService<ILogger<Services.Ddns>>();
+            Services.Ddns.Instance.RunAutoUpdate();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

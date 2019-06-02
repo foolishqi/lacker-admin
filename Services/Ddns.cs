@@ -8,12 +8,16 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace lacker_admin.Services
 {
     public class Ddns
     {
         public static readonly Ddns Instance = new Ddns();
+
+        public ILogger<Ddns> logger;
         
         private readonly HttpClient client;
 
@@ -83,18 +87,25 @@ namespace lacker_admin.Services
 
         private async Task AutoUpdateRecord()
         {
+            logger.LogInformation("{Time} Auto update record enabled.", DateTime.Now);
+
             var message = await GetRecord();
 
             while (true)
             {
                 var address = await GetIPAsync();
 
+                logger.LogTrace($"{DateTime.Now} Checking address: {address}");
+
                 if (!message.Contains(address))
                 {
                     message = await UpdateRecord(address);
+
+                    logger.LogInformation($"{DateTime.Now} Record not match, Updated.");
+                    logger.LogDebug($"{DateTime.Now} Response:\n{message}");
                 }
 
-                await Task.Delay(60 * 1000);
+                await Task.Delay(600 * 1000);
             }
         }
     }
