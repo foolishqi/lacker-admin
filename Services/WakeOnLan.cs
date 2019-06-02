@@ -12,8 +12,8 @@ namespace lacker_admin.Services
         private readonly IEnumerable<dynamic> hosts =
             new List<dynamic>
             {
-                new { host = "home", mac = "70:85:C2:36:CA:5A", address = "255.255.255.255", port = 8000 },
-                new { host = "yw", mac = "", address = "172.16.10.38", port = 8000 }
+                new { host = "home", mac = "70-85-C2-36-CA-5A", address = "255.255.255.255", port = 8000 },
+                new { host = "yw", mac = "4C-CC-6A-F0-21-3E", address = "172.16.10.38", port = 8000 }
             };
 
         public async Task Wake(string mac, string address, int port)
