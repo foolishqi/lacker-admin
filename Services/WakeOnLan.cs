@@ -22,7 +22,7 @@ namespace lacker_admin.Services
                 .Select(m => Convert.ToByte(m, 16))
                 .ToArray();
 
-            using (var client = new UdpClient(address, port))
+            using (var client = new UdpClient())
             using (var stream = new MemoryStream())
             {
                 client.EnableBroadcast = true;
@@ -37,7 +37,7 @@ namespace lacker_admin.Services
                     stream.Write(macBuffer, 0, 6);
                 }
 
-                await client.SendAsync(stream.GetBuffer(), (int)stream.Length);
+                await client.SendAsync(stream.GetBuffer(), (int)stream.Length, address, port);
             }
         }
 
