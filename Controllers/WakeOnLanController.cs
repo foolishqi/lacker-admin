@@ -26,5 +26,13 @@ namespace lacker_admin.Controllers
 
             return Ok();
         }
+
+        [HttpGet("wake/{host}")]
+        public async Task<ActionResult> Wake(string host)
+        {
+            await service.WakeHost(host);
+
+            return Ok();
+        }
     }
 }
