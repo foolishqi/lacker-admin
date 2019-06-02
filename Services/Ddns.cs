@@ -89,20 +89,19 @@ namespace lacker_admin.Services
         {
             logger.LogInformation("{Time} Auto update record enabled.", DateTime.Now);
 
-            var message = await GetRecord();
-
             while (true)
             {
+                var record = await GetRecord();
                 var address = await GetIPAsync();
 
                 logger.LogTrace($"{DateTime.Now} Checking address: {address}");
 
-                if (!message.Contains(address))
+                if (!record.Contains(address))
                 {
-                    message = await UpdateRecord(address);
+                    var message = await UpdateRecord(address);
 
-                    logger.LogInformation($"{DateTime.Now} Record not match, Updated.");
-                    logger.LogDebug($"{DateTime.Now} Response:\n{message}");
+                    logger.LogInformation($"{DateTime.Now} Update IP address: {address}.");
+                    logger.LogDebug($"{DateTime.Now} Update Response:\n{message}");
                 }
 
                 await Task.Delay(600 * 1000);
