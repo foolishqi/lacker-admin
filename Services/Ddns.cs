@@ -91,17 +91,24 @@ namespace lacker_admin.Services
 
             while (true)
             {
-                var record = await GetRecord();
-                var address = await GetIPAsync();
-
-                logger.LogTrace($"{DateTime.Now} Checking address: {address}");
-
-                if (!record.Contains(address))
+                try
                 {
-                    var message = await UpdateRecord(address);
+                    var record = await GetRecord();
+                    var address = await GetIPAsync();
 
-                    logger.LogInformation($"{DateTime.Now} Update IP address: {address}.");
-                    logger.LogDebug($"{DateTime.Now} Update Response:\n{message}");
+                    logger.LogTrace($"{DateTime.Now} Checking address: {address}");
+
+                    if (!record.Contains(address))
+                    {
+                        var message = await UpdateRecord(address);
+
+                        logger.LogInformation($"{DateTime.Now} Update IP address: {address}.");
+                        logger.LogDebug($"{DateTime.Now} Update Response:\n{message}");
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    logger.LogError(ex, "Update error.");
                 }
 
                 await Task.Delay(600 * 1000);
