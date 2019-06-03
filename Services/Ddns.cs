@@ -106,9 +106,13 @@ namespace lacker_admin.Services
                         logger.LogDebug($"{DateTime.Now} Update Response:\n{message}");
                     }
                 }
+                catch (System.OperationCanceledException)
+                {
+                    // ignored
+                }
                 catch (System.Exception ex)
                 {
-                    logger.LogError(ex, "Update error.");
+                    logger.LogError(ex, "{DateTime.Now} Update error.");
                 }
 
                 await Task.Delay(600 * 1000);
