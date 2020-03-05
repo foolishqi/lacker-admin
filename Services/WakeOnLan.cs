@@ -26,7 +26,7 @@ namespace lacker_admin.Services
             using (var stream = new MemoryStream())
             {
                 client.EnableBroadcast = true;
-                
+
                 for (int i = 0; i < 6; i++)
                 {
                     stream.WriteByte(0xFF);
@@ -43,9 +43,14 @@ namespace lacker_admin.Services
 
         public Task WakeHost(string host)
         {
-            var h = hosts.First(m => m.host == host);
+            var h = hosts.First(it => it.host == host);
 
             return Wake(h.mac, h.address, h.port);
+        }
+
+        public Task<IEnumerable<dynamic>> GetHosts()
+        {
+            return Task.FromResult(hosts.Select(it => it.host));
         }
     }
 }

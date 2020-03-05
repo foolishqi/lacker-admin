@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lacker-admin</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="host in hosts" :key="host"><a href="javascript::void(0)" @click="wakeHost(host)">{{ host }}</a></li>
+        </ul>
+        <div class="message">{{ message }}</div>
+    </div>
+    <script src="/js/index.js"></script>
+</body>
+</html>

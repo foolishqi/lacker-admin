@@ -7,7 +7,6 @@ using System.Net.Sockets;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -53,8 +52,8 @@ namespace lacker_admin.Services
             {
                 { "login_token", "99424,901e9241e465b3b53fb47e59b32289e1" },
                 { "format", "json" },
-                { "domain", "foolishqi.tk" },
-                { "record_id", "68881311" },
+                { "domain", "lacker.ml" },
+                { "record_id", "446701948" },
             });
 
             var response = await client.PostAsync("https://dnsapi.cn/Record.Info", content);
@@ -70,8 +69,8 @@ namespace lacker_admin.Services
             {
                 { "login_token", "99424,901e9241e465b3b53fb47e59b32289e1" },
                 { "format", "json" },
-                { "domain", "foolishqi.tk" },
-                { "record_id", "68881311" },
+                { "domain", "lacker.ml" },
+                { "record_id", "446701948" },
                 { "sub_domain", "m" },
                 { "record_type", "A" },
                 { "record_line_id", "0" },

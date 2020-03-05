@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace lacker_admin.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class DdnsController : ControllerBase
     {
         private readonly Ddns service;
@@ -19,9 +19,9 @@ namespace lacker_admin.Controllers
         }
 
         [HttpGet("update")]
-        public async Task<ActionResult> UpdateRecord()
+        public async Task UpdateRecord()
         {
-            return Ok(await service.UpdateRecord());
+            await service.UpdateRecord();
         }
     }
 }
